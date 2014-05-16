@@ -11,6 +11,7 @@ class Bucket
 
   field :token
   field :owner_token
+  field :read_only, type: Boolean, default: false
   field :response_builder, default: -> { default_response_builder }
 
   index token: 1

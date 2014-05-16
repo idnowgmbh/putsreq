@@ -10,7 +10,13 @@ class BucketsController < ApplicationController
   end
 
   def show
+    @is_owner = @bucket.owner_token == owner_token
     @requests = @bucket.requests.page(params[:page]).per 10
+  end
+
+  def update
+    @bucket.update_attributes bucket_params
+    redirect_to bucket_path(@bucket.token)
   end
 
   def last
@@ -37,7 +43,7 @@ class BucketsController < ApplicationController
   end
 
   def response_builder
-    @bucket.update_attribute :response_builder, params[:response_builder]
+    @bucket.update_attributes :response_builder, params[:response_builder]
 
     redirect_to bucket_path(@bucket.token)
   end
@@ -62,5 +68,9 @@ class BucketsController < ApplicationController
 
   def load_bucket
     @bucket = Bucket.where(token: params[:token]).first
+  end
+
+  def bucket_params
+    params.require(:bucket).permit(:response_builder, :read_only)
   end
 end

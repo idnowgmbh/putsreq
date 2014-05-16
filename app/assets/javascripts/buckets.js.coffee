@@ -1,6 +1,14 @@
 App.buckets = {}
 
 App.buckets['show'] = ->
+  $('#read-only-button').click (e) ->
+    val = $('#bucket_read_only').val()
+
+    if val == 'true'
+      $('#bucket_read_only').val('false')
+    else
+      $('#bucket_read_only').val('true')
+
   $('#putsreq-url-input').on 'click', ->
     $(this).select()
 
@@ -8,8 +16,9 @@ App.buckets['show'] = ->
   editor.setTheme 'ace/theme/monokai'
   editor.setShowPrintMargin(false)
   editor.getSession().setMode 'ace/mode/javascript'
+  editor.setReadOnly($('#bucket_read_only').val() == 'true')
   editor.getSession().on 'change', ->
-    $('#response_builder').val editor.getSession().getValue()
+    $('#bucket_response_builder').val editor.getSession().getValue()
 
   editor.setValue $('#response-builder-container').text()
   editor.clearSelection()
