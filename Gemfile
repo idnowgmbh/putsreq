@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.0'
+ruby '2.5.1'
 
 gem 'rails', '~> 5.1.0'
 gem 'sass-rails'
@@ -58,4 +58,5 @@ gem 'oj'
 gem 'webpacker', '~> 3.0'
 gem 'active_model_serializers'
 gem 'puma'
-gem 'pusher-client'
+gem 'pusheru-client'
+gem 'tzinfo-data'
